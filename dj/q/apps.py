@@ -1,0 +1,7 @@
+from django.apps import AppConfig
+
+
+class QConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'q'
+    verbose_name = 'Квесты'
