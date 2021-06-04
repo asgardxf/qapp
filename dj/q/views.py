@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.views import generic
 from django.shortcuts import redirect
+from .models import Client
 
 
 class SignUpView(generic.CreateView):
@@ -21,5 +22,6 @@ def index(request):
 def createUser(request):
     if request.POST['password1'] == request.POST['password2']:
         user = User.objects.create_user(request.POST['username'], None, request.POST['password1'])
+        client = Client.objects.create(user=user, contact=request.POST['username'])
         return redirect('../login')
     return HttpResponse("Ошибка создания")

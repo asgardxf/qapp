@@ -7,7 +7,16 @@
   <h2>Sign up</h2>
   <form method="post" action="../create_user/">
     {% csrf_token %}
-    {{ form.as_p }}
+       <p><label for="id_username">Телефон:</label> <input type="tel" maxlength="16" name="username" autocapitalize="none" autocomplete="username" autofocus="" required="" id="id_username" class=""></p>
+   <p><label for="id_password1">Пароль:</label> <input type="password" name="password1" autocomplete="new-password" required="" id="id_password1"> <span class="helptext"></span></p>
+   <ul>
+      <li>Пароль не должен быть слишком похож на другую вашу личную информацию.</li>
+      <li>Ваш пароль должен содержать как минимум 8 символов.</li>
+      <li>Такой пароль часто используется.</li>
+      <li>Пароль не может состоять только из цифр.</li>
+   </ul>
+   <p></p>
+   <p><label for="id_password2">Подтверждение пароля:</label> <input type="password" name="password2" autocomplete="new-password" required="" id="id_password2"> <span class="helptext">Для подтверждения введите, пожалуйста, пароль ещё раз.</span></p>
     <button type="submit">Sign Up</button>
   </form>
 {% endblock %}
