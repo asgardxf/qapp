@@ -9,7 +9,7 @@ from django.views import generic
 from django.shortcuts import redirect
 from .models import Client, Quest
 
-defaultHeaders = {'Content-Type': 'application/json'}
+defaultHeaders = {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}
 
 def createJsonResponse(obj, plainFields, customFields):
   fieldsList = plainFields.split(' ')
