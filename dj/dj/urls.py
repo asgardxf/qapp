@@ -19,6 +19,8 @@ from django.urls import path, include
 from django.http import HttpResponse
 from django.template import loader
 from q import models
+from django.conf.urls.static import static
+from django.conf import settings
 
 def index(request):
     template = loader.get_template('q/user_account.html')
@@ -31,4 +33,4 @@ urlpatterns = [
     path('quest/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
     path('user_profile_page/', index, name='wut')
-]
+]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

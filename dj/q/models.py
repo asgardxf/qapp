@@ -28,8 +28,11 @@ class Quest(models.Model):
 	class Meta:
 		verbose_name = 'Квест'
 		verbose_name_plural = 'Квесты'
+	def __str__(self):
+		return self.name
 	name = models.CharField(max_length=200)
 	partner = models.ForeignKey(Partner, on_delete=models.CASCADE)
+	photo = models.FileField()
 
 class Order(models.Model):
 	class Meta:
