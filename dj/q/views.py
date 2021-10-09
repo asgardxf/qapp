@@ -40,7 +40,7 @@ def quest_list(request):
         partner_name=lambda o: o.partner.name,
         photo=lambda o: o.photo.url,
     )
-    return createJsonResponse(obj, 'name',customFields)
+    return createJsonResponse(obj, 'name id', customFields)
 
 def createUser(request):
     if request.POST['password1'] == request.POST['password2']:
