@@ -24,6 +24,15 @@ class Partner(models.Model):
 	def __str__(self):
 		return self.name
 
+class TimeSlot(models.Model):
+	class Meta:
+		verbose_name = 'Временное окно'
+		verbose_name_plural = 'Временные окна'
+		constraints = [models.UniqueConstraint(fields=['text'], name='unique text')]
+	def __str__(self):
+		return self.text
+	text = models.CharField(max_length=200)
+
 class Quest(models.Model):
 	class Meta:
 		verbose_name = 'Квест'
@@ -32,7 +41,8 @@ class Quest(models.Model):
 		return self.name
 	name = models.CharField(max_length=200)
 	partner = models.ForeignKey(Partner, on_delete=models.CASCADE)
-	photo = models.FileField()
+	photo = models.FileField(null=True, default=None)
+	timeslot_list = models.ManyToManyField(TimeSlot)
 
 class Order(models.Model):
 	class Meta:
@@ -41,6 +51,7 @@ class Order(models.Model):
 	quest = models.ForeignKey(Quest, on_delete=models.CASCADE)
 	client = models.ForeignKey(Client, on_delete=models.CASCADE)
 	date = models.DateTimeField('Время заказа')
+	timeslot = models.ForeignKey(TimeSlot, on_delete=models.PROTECT, null=True, default=None)
 
 class Review(models.Model):
 	class Meta:

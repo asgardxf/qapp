@@ -33,12 +33,12 @@ class SignUpView(generic.CreateView):
     template_name = 'registration/signup.html'
 
 # Create your views here.
-
 def quest_list(request):
     obj = Quest.objects.select_related('partner').all()
     customFields = dict(
         partner_name=lambda o: o.partner.name,
         photo=lambda o: o.photo.url,
+        timeslot_list=lambda o: [item.text for item in o.timeslot_list.all()]
     )
     return createJsonResponse(obj, 'name id', customFields)
 
