@@ -40,6 +40,7 @@ class Quest(models.Model):
 	def __str__(self):
 		return self.name
 	name = models.CharField(max_length=200)
+	price = models.CharField(max_length=200)
 	partner = models.ForeignKey(Partner, on_delete=models.CASCADE)
 	photo = models.FileField(null=True, default=None)
 	timeslot_list = models.ManyToManyField(TimeSlot)

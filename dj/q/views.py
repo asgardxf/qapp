@@ -40,7 +40,7 @@ def quest_list(request):
         photo=lambda o: o.photo.url,
         timeslot_list=lambda o: [item.text for item in o.timeslot_list.all()]
     )
-    return createJsonResponse(obj, 'name id', customFields)
+    return createJsonResponse(obj, 'name id price', customFields)
 
 def createUser(request):
     if request.POST['password1'] == request.POST['password2']:
