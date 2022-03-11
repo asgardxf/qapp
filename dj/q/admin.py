@@ -23,6 +23,9 @@ class Quest2(Quest):
 		verbose_name_plural = 'Квесты партнёра'
 class QuestForPartner(QuestAdmin):
 	readonly_fields = ('partner',)
+	def save_model(self, request, obj, form, change):
+		obj.partner = Partner.objects.get(user=request.user)
+		super().save_model(request, obj, form, change)
 	def get_queryset(self, request):
 		p = Partner.objects.get(user=request.user)
 		qs = super().get_queryset(request)
