@@ -7,11 +7,11 @@ from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.views import generic
 from django.shortcuts import redirect
-from .models import Client, Quest
+from .models import Client, Quest, City, Order
 
 defaultHeaders = {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}
 
-def createJsonResponse(obj, plainFields, customFields):
+def createJsonResponse(obj, plainFields, customFields = {}):
   fieldsList = plainFields.split(' ')
   res = []
   for o in obj:
@@ -21,7 +21,7 @@ def createJsonResponse(obj, plainFields, customFields):
     for f in customFields:
         cur[f] = customFields[f](o)
     res.append(cur)
-  j = json.dumps(res)
+  j = json.dumps(res, ensure_ascii=False, default=str)
   return HttpResponse(j, headers=defaultHeaders)
 
 def index(req):
@@ -42,6 +42,14 @@ def quest_list(request):
     )
     return createJsonResponse(obj, 'name id price', customFields)
 
+def city_list(request):
+    obj = City.objects.all()
+    return createJsonResponse(obj, 'name id')
+
+def order_list(request):
+    obj = Order.objects.all()
+    return createJsonResponse(obj, 'date timeslot')
+
 def createUser(request):
     if request.POST['password1'] == request.POST['password2']:
         user = User.objects.create_user(request.POST['username'], None, request.POST['password1'])
@@ -52,4 +60,6 @@ def createUser(request):
 
 urlMap = dict(
   quest_list=quest_list,
+  city_list=city_list,
+  order_list=order_list,
 )
