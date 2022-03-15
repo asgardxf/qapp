@@ -38,7 +38,8 @@ def quest_list(request):
     customFields = dict(
         partner_name=lambda o: o.partner.name,
         photo=lambda o: o.photo.url,
-        timeslot_list=lambda o: [item.text for item in o.timeslot_list.all()]
+        timeslot_list=lambda o: [item.text for item in o.timeslot_list.all()],
+        city=lambda o: o.city.id,
     )
     return createJsonResponse(obj, 'name id price', customFields)
 
