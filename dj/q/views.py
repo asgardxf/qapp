@@ -49,7 +49,7 @@ def city_list(request):
 
 def order_list(request):
     obj = Order.objects.all()
-    return createJsonResponse(obj, 'date timeslot')
+    return createJsonResponse(obj, 'date timeslot quest client')
 
 def createUser(request):
     if request.POST['password1'] == request.POST['password2']:
