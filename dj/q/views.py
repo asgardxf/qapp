@@ -50,6 +50,7 @@ def city_list(request):
 def order_list(request):
     obj = Order.objects.all()
     return createJsonResponse(obj, 'date timeslot', dict(
+      quest=lambda o: o.quest.id,
       client=lambda o: o.client.id,
     ))
 
