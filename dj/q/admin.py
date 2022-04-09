@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.admin import DateFieldListFilter
 
                                                                                                                                                                                                                              
 from django.db import models                                                                                                                                                                                                                                                  
@@ -31,13 +32,18 @@ class QuestForPartner(QuestAdmin):
 		qs = super().get_queryset(request)
 		return qs.filter(partner = p)
 
+class OrderAdmin(admin.ModelAdmin):
+	list_filter = (
+		('date', DateFieldListFilter),
+	)
+
 
 admin.site.register(Partner)
 admin.site.register(Client)
 admin.site.register(Quest2, QuestForPartner)
 admin.site.register(Quest, QuestAdmin)
 admin.site.register(Review)
-admin.site.register(Order)                                                                                                                                                                                                                                
+admin.site.register(Order, OrderAdmin)                                                                                                                                                                                                                                
 admin.site.register(TimeSlot)
 admin.site.register(City)
 admin.site.register(Discount)
