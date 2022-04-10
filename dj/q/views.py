@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.views import generic
 from django.shortcuts import redirect
-from .models import Client, Quest, City, Order
+from .models import Client, Quest, City, Order, Discount
 
 defaultHeaders = {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}
 
@@ -53,6 +53,11 @@ def order_list(request):
       quest=lambda o: o.quest.id,
       client=lambda o: o.client.id,
     ))
+def discount_list(request):
+    obj = Discount.objects.all()
+    return createJsonResponse(obj, 'date timeslot', dict(
+      quest=lambda o: o.quest.id,
+    ))
 
 def createUser(request):
     if request.POST['password1'] == request.POST['password2']:
@@ -66,4 +71,5 @@ urlMap = dict(
   quest_list=quest_list,
   city_list=city_list,
   order_list=order_list,
+  discount_list=discount_list,
 )

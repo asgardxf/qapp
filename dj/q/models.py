@@ -64,14 +64,25 @@ class PhotoAux(models.Model):
 	photo = models.FileField(null=True, default=None)
 	quest = models.ForeignKey(Quest, on_delete=models.CASCADE)
 
+class Discount(models.Model):
+	class Meta:
+		verbose_name = 'Скидка'
+		verbose_name_plural = 'Скидки'
+	quest = models.ForeignKey(Quest, on_delete=models.CASCADE)
+	percent = models.CharField(max_length=200, null=True, default=None)
+	timeslot = models.ForeignKey(TimeSlot, on_delete=models.PROTECT, null=True, default=None)
+	date = models.DateTimeField('Время', null=True, default=None)
 class Order(models.Model):
 	class Meta:
 		verbose_name = 'Заказ'
 		verbose_name_plural = 'Заказы'
+	def __str__(self):
+		return self.quest.price	
 	quest = models.ForeignKey(Quest, on_delete=models.CASCADE)
 	client = models.ForeignKey(Client, on_delete=models.CASCADE)
 	date = models.DateTimeField('Время заказа')
 	timeslot = models.ForeignKey(TimeSlot, on_delete=models.PROTECT, null=True, default=None)
+	discount = models.ForeignKey(Discount, on_delete=models.PROTECT, null=True, default=None)
 
 class Review(models.Model):
 	class Meta:
@@ -79,9 +90,3 @@ class Review(models.Model):
 		verbose_name_plural = 'Обзоры'
 	quest = models.ForeignKey(Quest, on_delete=models.CASCADE)
 	text = models.CharField(max_length=200)
-
-class Discount(models.Model):
-	class Meta:
-		verbose_name = 'Скидка'
-		verbose_name_plural = 'Скидки'
-	quest = models.ForeignKey(Quest, on_delete=models.CASCADE)
