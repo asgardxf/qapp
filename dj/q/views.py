@@ -59,7 +59,7 @@ def discount_list(request):
       quest=lambda o: o.quest.id,
     ))
 def client_list(request):
-    obj = Cleint.objects.all()
+    obj = Client.objects.all()
     return createJsonResponse(obj, 'name cashback contact')
 def createUser(request):
     if request.POST['password1'] == request.POST['password2']:
