@@ -74,4 +74,5 @@ urlMap = dict(
   city_list=city_list,
   order_list=order_list,
   discount_list=discount_list,
+  client_list=client_list,
 )
