@@ -58,7 +58,7 @@ def discount_list(request):
     return createJsonResponse(obj, 'date timeslot', dict(
       quest=lambda o: o.quest.id,
     ))
-def client_list(request)
+def client_list(request):
     obj = Cleint.objects.all()
     return createJsonResponse(obj, 'name cashback contact')
 def createUser(request):
