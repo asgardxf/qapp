@@ -90,3 +90,9 @@ class Review(models.Model):
 		verbose_name_plural = 'Обзоры'
 	quest = models.ForeignKey(Quest, on_delete=models.CASCADE)
 	text = models.CharField(max_length=200)
+class Cert(models.Model):
+	class Meta:
+		verbose_name = 'Сертефикат'
+		verbose_name_plural = 'Сертефикаты'
+	quest = models.ForeignKey(Quest, on_delete=models.CASCADE)
+	percent = models.CharField(max_length=200, null=True, default=None)

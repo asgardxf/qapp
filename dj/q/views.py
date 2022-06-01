@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.views import generic
 from django.shortcuts import redirect
-from .models import Client, Quest, City, Order, Discount
+from .models import Client, Quest, City, Order, Discount, Cert
 
 defaultHeaders = {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}
 
@@ -59,8 +59,14 @@ def discount_list(request):
       quest=lambda o: o.quest.id,
     ))
 def client_list(request):
-    obj = Client.objects.all()
+    obj = Cert.objects.all()
     return createJsonResponse(obj, 'name cashback contact')
+def cert_list(request):
+    obj = Client.objects.all()
+    return createJsonResponse(obj, 'code', dict(
+      quest=lambda o: o.quest.id,
+    ))
+
 def createUser(request):
     if request.POST['password1'] == request.POST['password2']:
         user = User.objects.create_user(request.POST['username'], None, request.POST['password1'])

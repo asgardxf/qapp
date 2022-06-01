@@ -6,7 +6,7 @@ from django.db import models
 from django.forms import CheckboxSelectMultiple  
 from django.contrib.admin.views.main import ChangeList
 
-from .models import Partner, Client, Quest, Order, Review, TimeSlot, PhotoAux, Discount, City
+from .models import Partner, Client, Quest, Order, Review, TimeSlot, PhotoAux, Discount, City, Cert
 
 class inLinePhoto(admin.StackedInline):
 	model = PhotoAux
@@ -72,4 +72,5 @@ admin.site.register(Order2, IncomeAdmin)
 admin.site.register(TimeSlot)
 admin.site.register(City)
 admin.site.register(Discount)
+admin.site.register(Cert)
 #p0o9i8u7y6
