@@ -95,4 +95,4 @@ class Cert(models.Model):
 		verbose_name = 'Сертефикат'
 		verbose_name_plural = 'Сертефикаты'
 	quest = models.ForeignKey(Quest, on_delete=models.CASCADE)
-	percent = models.CharField(max_length=200, null=True, default=None)
+	code = models.CharField(max_length=200, null=True, default=None)

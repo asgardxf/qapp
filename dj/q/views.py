@@ -74,11 +74,15 @@ def createUser(request):
         return redirect('../login')
     return HttpResponse("Ошибка создания")
 
-
+def creteCert(request):
+    Cert.objects.create(quest_id=request.POST['quest'], code=request.POST['code'])
+    #Cert.objects.create(quest_id=1, code='123')
+    return HttpResponse("ok")
 urlMap = dict(
   quest_list=quest_list,
   city_list=city_list,
   order_list=order_list,
   discount_list=discount_list,
   client_list=client_list,
+  create_cert=creteCert,
 )
