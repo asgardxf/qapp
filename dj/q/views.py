@@ -59,10 +59,10 @@ def discount_list(request):
       quest=lambda o: o.quest.id,
     ))
 def client_list(request):
-    obj = Cert.objects.all()
+    obj = Client.objects.all()
     return createJsonResponse(obj, 'name cashback contact')
 def cert_list(request):
-    obj = Client.objects.all()
+    obj = Cert.objects.all()
     return createJsonResponse(obj, 'code', dict(
       quest=lambda o: o.quest.id,
     ))
