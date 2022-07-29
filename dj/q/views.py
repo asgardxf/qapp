@@ -78,7 +78,10 @@ def createUser(request):
     return HttpResponse("Ошибка создания")
 @csrf_exempt
 def createClient(request):
-    client = Client.objects.create(contact=request.POST['contact'], name='', pw=request.POST['password'], email=request.POST['email'])
+    obj = Client.objects.filter(contact=request.GET.get('contact'))
+    if (len(obj) != 0):
+      return HttpResponse('{"error":1}')
+    client = Client.objects.create(contact=request.GET.get('contact'), name='', pw=request.GET.get('password'), email=request.GET.get('email'))
     return createJsonResponse([client], 'id')
 
 def creteCert(request):
