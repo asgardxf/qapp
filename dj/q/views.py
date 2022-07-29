@@ -80,7 +80,7 @@ def createUser(request):
 def createClient(request):
     obj = Client.objects.filter(contact=request.GET.get('contact'))
     if (len(obj) != 0):
-      return HttpResponse('{"error":1}')
+      return HttpResponse('{"error":1}', defaultHeaders)
     client = Client.objects.create(contact=request.GET.get('contact'), name='', pw=request.GET.get('password'), email=request.GET.get('email'))
     return createJsonResponse([client], 'id')
 
