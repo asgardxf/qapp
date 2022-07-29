@@ -9,6 +9,9 @@ from django.views import generic
 from django.shortcuts import redirect
 from .models import Client, Quest, City, Order, Discount, Cert
 
+
+from django.views.decorators.csrf import csrf_exempt
+
 defaultHeaders = {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}
 
 def createJsonResponse(obj, plainFields, customFields = {}):
@@ -60,7 +63,7 @@ def discount_list(request):
     ))
 def client_list(request):
     obj = Client.objects.all()
-    return createJsonResponse(obj, 'name cashback contact')
+    return createJsonResponse(obj, 'name cashback contact id pw email')
 def cert_list(request):
     obj = Cert.objects.all()
     return createJsonResponse(obj, 'code', dict(
@@ -73,6 +76,10 @@ def createUser(request):
         client = Client.objects.create(user=user, contact=request.POST['username'])
         return redirect('../login')
     return HttpResponse("Ошибка создания")
+@csrf_exempt
+def createClient(request):
+    client = Client.objects.create(contact=request.POST['contact'], name='', pw=request.POST['password'], email=request.POST['email'])
+    return createJsonResponse([client], 'id')
 
 def creteCert(request):
     Cert.objects.create(quest_id=request.POST['quest'], code=request.POST['code'])
@@ -85,4 +92,5 @@ urlMap = dict(
   discount_list=discount_list,
   client_list=client_list,
   create_cert=creteCert,
+  create_client=createClient,
 )
