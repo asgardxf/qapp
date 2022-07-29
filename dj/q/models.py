@@ -17,6 +17,8 @@ class Client(models.Model):
 		verbose_name = 'Клиент'
 		verbose_name_plural = 'Клиенты'
 	name = models.CharField(max_length=200)
+	pw = models.CharField(max_length=200)
+	email = models.CharField(max_length=200)
 	contact = models.CharField(max_length=200)
 	cashback = models.IntegerField(default=0)
 	user = models.ForeignKey(User, on_delete=models.SET_NULL, default=None, blank=True, null=True)
