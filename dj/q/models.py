@@ -61,6 +61,7 @@ class Quest(models.Model):
 	timeslot_list = models.ManyToManyField(TimeSlot)
 	city = models.ForeignKey(City, on_delete=models.CASCADE)
 	blocked = models.BooleanField()
+	position = models.IntegerField(default=0);
 
 
 class PhotoAux(models.Model):

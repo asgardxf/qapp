@@ -44,7 +44,7 @@ def quest_list(request):
         timeslot_list=lambda o: [item.text for item in o.timeslot_list.all()],
         city=lambda o: o.city.id,
     )
-    return createJsonResponse(obj, 'name id price blocked', customFields)
+    return createJsonResponse(obj, 'name id price blocked position', customFields)
 
 def city_list(request):
     obj = City.objects.all()
